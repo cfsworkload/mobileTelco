@@ -137,7 +137,7 @@ analyticsKey: This is the Google analytics key.
 3. Replace the placeholder text in the secrets.xml by this Tracking ID.
 
 
-**wlclient.properties:**
+**wlclient.properties**: This properties file contains information about the app ID and version as well as the MobileFirst server host and port. For the purposes of this solution, only the wlServerHost property needs to be updated.
 
 - wlServerHost: The IP address of your MobileFirst server container.
 
@@ -148,9 +148,7 @@ analyticsKey: This is the Google analytics key.
 - wlAppVersion: Your application version. This can also be found in the application-descriptor.xml file located in the following directory: /TelcoReadyAppMFP/apps/TelcoReadyAppAndroid/ (Ex: 1.0)
 
 ## Configure the IBM MobileFirst Platform Server Container
-
-1. Review the license and download the [ibm-mfpf-container-7.1.0.0-eval.zip](http://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-BVID-9XEQG7&accepted_url=http://public.dhe.ibm.com/ibmdl/export/pub/software/products/en/MobileFirstPlatform/mfpfcontainers/ibm-mfpf-container-7.1.0.0-eval.zip).
-2. 
+ 
 
 ### Update MobileFirst server configuration files
 
@@ -186,7 +184,7 @@ In the args folder are a set of configuration files which contain the properties
 ## Run the scripts to build and deploy
 The scripts found in the mfpf-server/scripts directory use the properties set in the previous section to build and deploy 
 ### installcontainercli.sh – Adding Container Extension to the MobileFirst CLI
-In order to use the Container Extension you must first add it to the MobileFirst CLI.
+In order to use the Container Extension you must first add it to the MobileFirst CLI. Before running this script, make sure the Docker daemon is running, JAVA_HOME attribute is set, and the MobileFirst CLI path is set.
 Run:
 
   `sudo ./installcontainercli.sh`
@@ -225,34 +223,20 @@ The startserver.sh script is used to run the Mobilefirst Server image on an IBM 
 
   `./startserver.sh args/startserver.properties`
 
-Once the container has     
+Once the container has started, follow the steps below to add the    
 1. Launch the MobileFirst Console by loading the following URL: http://<server_ip>:9080/worklightconsole (it may take a few moments).
 2. Upload the .wlapp and .adapter files.
 3. Update the application’s worklight.plist (for iOS) and/or wlclient.properties (for Android, Windows Universal, Windows Phone) with the protocol, host and port values of the IBM Container.
 4. You can now run your application to verify that it successfully connects to the MobileFirst Server, running on IBM Containers.
 
 
-
-
-./initenv.sh args/initenv.properties  						(log into blue mix and the right orgs)
-		Make sure docker daemon is running
-		Make sure JAVA_HOME is set  export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home"
-		make sure MF CLI path is set   export PATH=$PATH:/Applications/IBM/MobileFirst-CLI
-3. Run the prepareserverdbs.sh script first with the RUNTIME_NAME variable in the prepareserverdbs.properties file commented out. This will install 
-	./prepareserverdbs.sh args/prepareserverdbs.properties       (Once without RUNTIME_NAME)
-			??? Update app.properties and build war file with ‘mfp push’
-			Get 
-./prepareserverdbs.sh args/prepareserverdbs.properties      ( and once each for the RUNTIME_NAME)
-./prepareserver.sh args/prepareserver.properties			(run the docker file)
-6. Run the image on IBM Container by running the starterver.sh script. This script rus the Mobilefirst Server image on IBM Container and binds the container to the public IP set in the SERVER_IP property.
-	./startserver.sh args/startserver.properties
-
-
 ## Install App on Android Devices
 
-Compile and Run the android project
+Compile and Run the android project on an Android emulator or Android device to see the app in action.
 1. Start Android Studio.
 2. Click the Quick Start option, “Open an existing Android Studio project”.
 3. Navigate to the cloned repository folder, IBM-Ready-App-for-Telecommunications, and select the TelcoReadyAppAndroid folder. Then click the Choose button.
-4. Once the new project is done loading into Android Studio, you can click the Run button at the top to compile and run the app on an Android device connected to your computer. Note: If you are new to Android development, you may need to go into your device settings and enable USB debugging for your computer to recognize the device.
+4. Once the new project is done loading into Android Studio, you can click the Run button at the top to compile and run the app on an Android device connected to your computer. 
+
+Note: If you are new to Android development, you may need to go into your device settings and enable USB debugging for your computer to recognize the device. Also, when using Android Studio, if you use the emulator instead of an Android device, no other Virtual Machines can be running, including the Docker daemon.
 
