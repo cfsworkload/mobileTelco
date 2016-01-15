@@ -9,7 +9,7 @@ IBM Ready App for Telecommunications demonstrates a new genre of mobile service 
 - **Android Studio** - To install the app on an Android phone or run it in an Android emulator, install Android Studio from http://developer.android.com/sdk/index.html.
 - **Oracle Java 1.8** - To avoid versioning issues when creating adapters, the MobileFirst container is built with Oracle Java 8 and must be a higher version of Java that is used to build the adapters. Other versions of Java such as OpenJDK may also cause version incompatibility issues.
 - **Docker version 1.6 or higher** - Docker is required to create your MobileFirst server container as defined by a Dockerfile. See the [installation instructions](https://docs.docker.com/machine/install-machine/) to install Docker for your operating system.
-- **Eclipse Luna v4.4.2 or higher** - Eclipse is needed to run a java application to upload hotspot data to the Cloudant Geo database.
+- **[Eclipse](https://eclipse.org/downloads/) Luna v4.4.2 or higher** - Eclipse is needed to run a java application to upload hotspot data to the Cloudant Geo database. When installing Eclipse, select Eclipse IDE for Java EE Developers.
 
 
 ## Sign up and log into Bluemix and DevOps
@@ -65,11 +65,21 @@ Create a Cloudant account and database to be accessed and populated with hotspot
 1. Go to Cloudant.com to create an account.
 2. Click **Create Database**, enter a name for the database and click **Create** to create your geospatial capable database.
 
+### Install IBM MobileFirst Platform Studio 7.1.0 Eclipse Plugin
+IBM MobileFirst Platform Studio is an Eclipse plug-in that helps you quickly build, run, and manage mobile web, hybrid, and native apps.
+
+1. Select Help -> Eclipse Marketplace to open the Eclipse Marketplace window.
+2. In the Find field, enter "MobileFirst" and click **Go** to search for the MobileFirst package.
+3. Find IBM MobleFirst Platform Studio 7.1.0 and click the **Install** button.
+4. Click **Confirm** to proceed with the default selected items.
+5. Select **I accept the terms of the license agreements** and click **Finish**.
+6. Restart Eclipse to complete the installation of IBM MobileFirst Platform Studio 7.1.0.
+ 
 ### Import project into Eclipse
 In Eclipse, import the TelcoReadyAppMFP folder into the Eclipse workspace to access CloudantService.java for the next section.
 
-1. First, go back to your Eclipse IDE and change your view to the Package Explorer. This can be accessed via Window > Show View > Other > Project Explorer. This will open up the Project Explorer in the left panel of your Eclipse workspace. 
-2. Next, right-click on the Package Explorer and choose **Import**. 
+1. First, go back to your Eclipse IDE and change your view to the Package Explorer. This can be accessed via Window > Show View > Other > General > Project Explorer. This will open up the Project Explorer in the left panel of your Eclipse workspace. 
+2. Next, right-click on the Package Explorer and choose **Import** -> **Import**. 
 3. In the resulting dialog, find and expand the General folder and select Existing Projects into Workspace. 
 4. Now, select **Next** and navigate to location where you have saved the Telco source code. 
 5. Finally, choose the TelcoReadyAppMFP folder in the resulting dialog and choose **Finish** to complete the import.
@@ -80,8 +90,8 @@ In Eclipse, import the TelcoReadyAppMFP folder into the Eclipse workspace to acc
 
 The database is now set up to query using the CloudantGeoAdapter under the MobileFirst Platform.
 
-## Install MobileFirst Platform Foundation CLI
-The IBM MobileFirstFirst Platform Command Line Interface...
+## Install MobileFirst Platform CLI
+The IBM MobileFirstFirst Platform Command Line Interface tool is used to easily create, manage, push, and register MobileFirst client and server artifacts. Specifically, you will use the CLI to create the server artifacts in the next section.
 
 1. Download the CLI package for the required release version:
    [MobileFirst Platform Foundation CLI v7.1 (20151214)](http://public.dhe.ibm.com/ibmdl/export/pub/software/products/en/MobileFirstPlatform/mobilefirst_cli_installer_7.1.0.zip)
@@ -92,7 +102,7 @@ The IBM MobileFirstFirst Platform Command Line Interface...
 3. Select and run the installer that is appropriate for your platform. A GUI appears and guides you through the installation of Command Line Interface. Follow the instructions to complete your installation.
 4. On completion of the installation, log out from the OS, and then log back in. This action ensures that the appropriate commands are on your system path.
 
-## Create the MobileFirst Project files
+## Create the MobileFirst server files
 To have a MobileFirst project run on a MobileFirst server, a runtime environment must be included on the server. This is done by adding a .war file for the MobileFirst project to the server. 
 
 To create these files, in your bash terminal, go to your MobileFirst project folder. (i.e. IBM-Ready-App-for-Telecommunications/TelcoReadyAppMFP) From that directory run the MobileFirst CLI command:
