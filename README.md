@@ -92,6 +92,19 @@ The IBM MobileFirstFirst Platform Command Line Interface...
 3. Select and run the installer that is appropriate for your platform. A GUI appears and guides you through the installation of Command Line Interface. Follow the instructions to complete your installation.
 4. On completion of the installation, log out from the OS, and then log back in. This action ensures that the appropriate commands are on your system path.
 
+## Create the MobileFirst Project files
+To have a MobileFirst project run on a MobileFirst server, a runtime environment must be included on the server. This is done by adding a .war file for the MobileFirst project to the server. 
+
+To create these files, in your bash terminal, go to your MobileFirst project folder. (i.e. IBM-Ready-App-for-Telecommunications/TelcoReadyAppMFP) From that directory run the MobileFirst CLI command:
+ 
+  `mfp push`
+  
+If you had a MobileFirst server running locally, it would create the necessary files(.war, .adapter, .wlapp) and push them to the server. An error may appear, but the files are still created. All files must be compiled with the same or lower version of Java than what the server was built.
+
+Adapters are server-side Java or Javascript code used to transfer and retrieve information from back-end systems to client applications and cloud services. This solution uses three adapters.
+-  **TelcoUserAdapter**- Located in TelcoReadyAppMFP/adapters/TelcoUserAdapter, the TelcoUserAdapter controls all of the data that a user would request including offers, profile, etc. Some of these methods are protected by OAuth Security and can only be accessed by authenticating with the AuthenticationAdapter.
+-  **CloudantGeoAdapter**- Located in TelcoReadyAppMFP/adapters/CloudantGeoAdapter, this adapter contains a method to query wifi hotspots around a given user's location.
+-  **AuthenticationAdapter**- Located in TelcoReadyAppMFP/adapters/AuthenticationAdapter, this adapter is a javascript adapter with basic authentication for a user. This AuthenticationAdapter protects the realm challenged during the OAuth handshake.
 
 ## Set Telco Android app properties file 
 
@@ -146,6 +159,7 @@ analyticsKey: This is the Google analytics key.
 - wlAppId: Your application id. This can be found in the application-descriptor.xml file located in the following directory: /TelcoReadyAppMFP/apps/TelcoReadyAppAndroid/ (Ex: myApp)
 
 - wlAppVersion: Your application version. This can also be found in the application-descriptor.xml file located in the following directory: /TelcoReadyAppMFP/apps/TelcoReadyAppAndroid/ (Ex: 1.0)
+
 
 ## Configure the IBM MobileFirst Platform Server Container
  
