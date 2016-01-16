@@ -8,7 +8,7 @@ IBM Ready App for Telecommunications demonstrates a new genre of mobile service 
 #### Prerequisite Software
 - **Android Studio** - To install the app on an Android phone or run it in an Android emulator, install Android Studio from http://developer.android.com/sdk/index.html.
 - **Oracle Java 1.8** - To avoid versioning issues when creating adapters, the MobileFirst container is built with Oracle Java 8 and must be a higher version of Java that is used to build the adapters. Other versions of Java such as OpenJDK may also cause version incompatibility issues.
-- **Docker version 1.6 or higher** - Docker is required to create your MobileFirst server container as defined by a Dockerfile. See the [installation instructions](https://docs.docker.com/machine/install-machine/) to install Docker for your operating system.
+- **Docker and IBM Containers Extension(ice)** - Docker and ice are required to create your MobileFirst server container as defined by a Dockerfile. See the [installation instructions](https://www.ng.bluemix.net/docs/containers/container_cli_ice_ov.html) in Option 2, to install Docker and ice for your operating system.
 - **[Eclipse](https://eclipse.org/downloads/) Luna v4.4.2 or higher** - Eclipse is needed to run a java application to upload hotspot data to the Cloudant Geo database. When installing Eclipse, select Eclipse IDE for Java EE Developers.
 
 
@@ -41,6 +41,7 @@ Once installed:
 3. Release an IP address.
 
   `cf ic ip release <public IP>`
+  
 
 ## Download solution files
 The files required for this solution are here on this GitHub repository and a zip file of the IBM MobileFirst Platform Foundation for containers
@@ -48,7 +49,7 @@ The files required for this solution are here on this GitHub repository and a zi
 ### Download IBM MobileFirst Platform Foundation server for containers
 The IBM MobileFirst Platform Foundation project contains source code and scripts needed to build and deploy an MFPF server on IBM containers. Using this project allows any MobileFirst runtime environment to be included in the IBM container. The zip file includes separate installation packages for the MobileFirst Operations Console and the MobileFirst Analytics Console. For the purposes of this solution, you only need the Operations Console to get the mobile app up and running.
 
-[Download](https://ibm.box.com/shared/static/1x4getedme1ulgm2fnf8g4y7ghdqfipv.zip) the zip file from IBM Box and unzip it.
+[Download](https://ibm.box.com/shared/static/f5pjquilnsntkxqzyv3kz89zunqiiu7a.zip) the zip file from IBM Box and unzip it.
 
 ### Clone IBM ReadyApp for Telecommunications GitHub repository
 This repository contains the updated solution for the IBM ReadyApp for Telecommunications to work with Bluemix containers as well as the source code for the app itself. Clone this with the following git command.
@@ -102,19 +103,26 @@ The IBM MobileFirstFirst Platform Command Line Interface tool is used to easily 
 3. Select and run the installer that is appropriate for your platform. A GUI appears and guides you through the installation of Command Line Interface. Follow the instructions to complete your installation.
 4. On completion of the installation, log out from the OS, and then log back in. This action ensures that the appropriate commands are on your system path.
 
+When the MobileFirst CLI is installed, you should be able to run mfp commands. The MobileFirst-CLI directory should be in the PATH environment variable to allow access to the mfp command. i.e. PATH=$PATH:/Applications/IBM/MobileFirst-CLI
+
 ## Create the MobileFirst server files
 To have a MobileFirst project run on a MobileFirst server, a runtime environment must be included on the server. This is done by adding a .war file for the MobileFirst project to the server. 
 
+### Create Adapters
+Adapters are server-side Java or Javascript code used to transfer and retrieve information from back-end systems to client applications and cloud services. This solution uses three adapters.
+
+-  **TelcoUserAdapter**- Located in TelcoReadyAppMFP/adapters/TelcoUserAdapter, the TelcoUserAdapter controls all of the data that a user would request including offers, profile, etc. Some of these methods are protected by OAuth Security and can only be accessed by authenticating with the AuthenticationAdapter.
+-  **CloudantGeoAdapter**- Located in TelcoReadyAppMFP/adapters/CloudantGeoAdapter, this adapter contains a method to query wifi hotspots around a given user's location.
+-  **AuthenticationAdapter**- Located in TelcoReadyAppMFP/adapters/AuthenticationAdapter, this adapter is a javascript adapter with basic authentication for a user. This AuthenticationAdapter protects the realm challenged during the OAuth handshake.
+
+To easily create these files, in Eclipse, for each folder in TelcoReadyAppMFP/adapters, right click on the folder and select **Run As** > **Deploy Mobile First Adapter**. This will create the adapter files in the TelcoReadyAppMFP/bin folder.
+
+### Create .war and .wlapp files
 To create these files, in your bash terminal, go to your MobileFirst project folder. (i.e. IBM-Ready-App-for-Telecommunications/TelcoReadyAppMFP) From that directory run the MobileFirst CLI command:
  
   `mfp push`
   
-If you had a MobileFirst server running locally, it would create the necessary files(.war, .adapter, .wlapp) and push them to the server. An error may appear, but the files are still created. All files must be compiled with the same or lower version of Java than what the server was built.
-
-Adapters are server-side Java or Javascript code used to transfer and retrieve information from back-end systems to client applications and cloud services. This solution uses three adapters.
--  **TelcoUserAdapter**- Located in TelcoReadyAppMFP/adapters/TelcoUserAdapter, the TelcoUserAdapter controls all of the data that a user would request including offers, profile, etc. Some of these methods are protected by OAuth Security and can only be accessed by authenticating with the AuthenticationAdapter.
--  **CloudantGeoAdapter**- Located in TelcoReadyAppMFP/adapters/CloudantGeoAdapter, this adapter contains a method to query wifi hotspots around a given user's location.
--  **AuthenticationAdapter**- Located in TelcoReadyAppMFP/adapters/AuthenticationAdapter, this adapter is a javascript adapter with basic authentication for a user. This AuthenticationAdapter protects the realm challenged during the OAuth handshake.
+If you had a MobileFirst server running locally, it would create the necessary files(.war, .wlapp) and push them to the server. An error may appear, but the files are still created. All files must be compiled with the same or lower version of Java than what the server was built.
 
 ## Set Telco Android app properties file 
 
@@ -171,10 +179,7 @@ analyticsKey: This is the Google analytics key.
 - wlAppVersion: Your application version. This can also be found in the application-descriptor.xml file located in the following directory: /TelcoReadyAppMFP/apps/TelcoReadyAppAndroid/ (Ex: 1.0)
 
 
-## Configure the IBM MobileFirst Platform Server Container
- 
-
-### Update MobileFirst server configuration files
+## Update MobileFirst server configuration files
 
 In the args folder are a set of configuration files which contain the properties that are required to run the scripts. Fill in the arguments’ values in the following files:
 
@@ -206,12 +211,16 @@ In the args folder are a set of configuration files which contain the properties
 - SERVER_IP – An IP address that the Bluemix Container should be bound to. Use the IP address that you acquired earlier.
 
 ## Run the scripts to build and deploy
-The scripts found in the mfpf-server/scripts directory use the properties set in the previous section to build and deploy 
+The scripts found in the mfpf-server/scripts directory use the properties set in the previous section to build and deploy the MobileFirst server with the Telecommunications runtime environment. These scripts mustrun in the bash shell or they may not run as expected.
+
 ### installcontainercli.sh – Adding Container Extension to the MobileFirst CLI
 In order to use the Container Extension you must first add it to the MobileFirst CLI. Before running this script, make sure the Docker daemon is running, JAVA_HOME attribute is set, and the MobileFirst CLI path is set.
+	
 Run:
 
   `sudo ./installcontainercli.sh`
+
+Successful completion of this script should result in a 'Done' message.
 
 ### initenv.sh – Logging in to Bluemix
 Run the initenv.sh script in order to create an environment for building and running IBM MobileFirst Platform Foundation on the IBM Containers:
@@ -219,7 +228,7 @@ Run the initenv.sh script in order to create an environment for building and run
   `./initenv.sh args/initenv.properties`
 
 ### prepareserverdbs.sh – Prepare the MobileFirst Server database
-The prepareserverdbs.sh script is used to configure your MobileFirst project database. You will need to run it separately, once for the admin database and once for every MobileFirst project runtime database.
+The prepareserverdbs.sh script is used to configure your MobileFirst project database. You will need to run it separately, once for the admin database and once for every MobileFirst project runtime database. Successful completion of this script should result in a "Successfully Completed Cloudant NoSQL DB Service Binding" message.
 
 1. For the admin database make sure to comment out the RUNTIME_NAME argument in the prepareserverdbs.properties file and run:
 
