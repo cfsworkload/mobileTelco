@@ -49,7 +49,7 @@ The files required for this solution are here on this GitHub repository and a zi
 ### Download IBM MobileFirst Platform Foundation server for containers
 The IBM MobileFirst Platform Foundation project contains source code and scripts needed to build and deploy an MFPF server on IBM containers. Using this project allows any MobileFirst runtime environment to be included in the IBM container. The zip file includes separate installation packages for the MobileFirst Operations Console and the MobileFirst Analytics Console. For the purposes of this solution, you only need the Operations Console to get the mobile app up and running.
 
-[Download](https://ibm.box.com/shared/static/f5pjquilnsntkxqzyv3kz89zunqiiu7a.zip) the zip file from IBM Box and unzip it.
+[Download](https://ibm.box.com/shared/static/z1cvv2p6sx90jbwdq1h68wziwhnnd55h.zip) the zip file from IBM Box and unzip it.
 
 ### Clone IBM ReadyApp for Telecommunications GitHub repository
 This repository contains the updated solution for the IBM ReadyApp for Telecommunications to work with Bluemix containers as well as the source code for the app itself. Clone this with the following git command.
@@ -256,9 +256,10 @@ The startserver.sh script is used to run the Mobilefirst Server image on an IBM 
 
   `./startserver.sh args/startserver.properties`
 
-Once the container has started, follow the steps below to add the    
-1. Launch the MobileFirst Console by loading the following URL: http://<server_ip>:9080/worklightconsole (it may take a few moments).
-2. Upload the .wlapp and .adapter files.
+Once the container has started, follow the steps below to add the app and adapters.
+   
+1. Launch the MobileFirst Console by loading the following URL: http://<server_ip>:9080/worklightconsole (it may take a few moments). The default login/password combination is admin/admin.
+2. Upload the .wlapp and .adapter files by clicking on the **Add new app or adapter** button and selecting the files from your TelcoReadyAppMFP/bin directory.
 3. Update the application’s worklight.plist (for iOS) and/or wlclient.properties (for Android, Windows Universal, Windows Phone) with the protocol, host and port values of the IBM Container.
 4. You can now run your application to verify that it successfully connects to the MobileFirst Server, running on IBM Containers.
 
