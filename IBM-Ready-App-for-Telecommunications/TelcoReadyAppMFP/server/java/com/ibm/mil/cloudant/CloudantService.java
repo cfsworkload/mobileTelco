@@ -107,6 +107,7 @@ public final class CloudantService {
 	public static void main(String... args) {
 		
 		CloudantService.getInstance().saveFileToCloudant(Constants.FILENAME_HOTSPOTS);
+		System.out.println("Populated DB successfully with Hotspots.");
 	}
 	
 	
