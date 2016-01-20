@@ -106,7 +106,7 @@ The IBM MobileFirstFirst Platform Command Line Interface tool is used to easily 
 When the MobileFirst CLI is installed, you should be able to run mfp commands. The MobileFirst-CLI directory should be in the PATH environment variable to allow access to the mfp command. i.e. PATH=$PATH:/Applications/IBM/MobileFirst-CLI
 
 ## Create the MobileFirst server files
-To have a MobileFirst project run on a MobileFirst server, a runtime environment must be included on the server. This is done by adding a .war file for the MobileFirst project to the server. 
+To have a MobileFirst project run on a MobileFirst server, a runtime environment must be included on the server. This is done by adding a .war file for the MobileFirst project to the server.  Files created in this section are created in the TelcoReadyAppMFP/bin folder.
 
 ### Create Adapters
 Adapters are server-side Java or Javascript code used to transfer and retrieve information from back-end systems to client applications and cloud services. This solution uses three adapters.
@@ -122,7 +122,7 @@ To create these files, in your bash terminal, go to your MobileFirst project fol
  
   `mfp push`
   
-If you had a MobileFirst server running locally, it would create the necessary files(.war, .wlapp) and push them to the server. An error may appear, but the files are still created. All files must be compiled with the same or lower version of Java than what the server was built.
+If you had a MobileFirst server running locally, it would create the necessary files(.war, .wlapp) and push them to the server. An error may appear if you do not have a local mfp server running, but the files are still created. All files must be compiled with the same or lower version of Java than what the server was built.
 
 ## Set Telco Android app properties file 
 
