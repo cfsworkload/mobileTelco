@@ -7,15 +7,18 @@ IBM Ready App for Telecommunications demonstrates a new genre of mobile service 
 
 #### Prerequisite Software
 - **Android Studio** - To install the app on an Android phone or run it in an Android emulator, install Android Studio from http://developer.android.com/sdk/index.html.
-- **Oracle Java 1.8** - To avoid versioning issues when creating adapters, the MobileFirst container is built with Oracle Java 8 and must be a higher version of Java that is used to build the adapters. Other versions of Java such as OpenJDK may also cause version incompatibility issues.
+- **Java 1.7+** - Java is required to create MobileFirst server files. The version of Java on your machine must also be compatible with the version installed on the IBM container for the MobileFirst server. More about this in a later section. 
 - **Docker and IBM Containers Extension(ice)** - Docker and ice are required to create your MobileFirst server container as defined by a Dockerfile. See the [installation instructions](https://www.ng.bluemix.net/docs/containers/container_cli_ice_ov.html) in Option 2, to install Docker and ice for your operating system.
 - **[Eclipse](https://eclipse.org/downloads/) Luna v4.4.2 or higher** - Eclipse is needed to run a java application to upload hotspot data to the Cloudant Geo database. When installing Eclipse, select Eclipse IDE for Java EE Developers.
 
+#### Other Notes
+- The IBM MobileFirst Platform Foundation on IBM Containers does not currently run Windows OS but a virtual machine with Linux can be used to run the scripts.
 
 ## Sign up and log into Bluemix and DevOps
 Sign up for Bluemix at https://console.ng.bluemix.net and DevOps Services at https://hub.jazz.net. When you sign up, you'll create an IBM ID, create an alias, and register with Bluemix.
 
-## Make sure a public IP is available in your Bluemix space
+
+## Get a public IP in your Bluemix space
 This solution requires a free public IP. In order to determine if a public IP is available, you need to find the number of used and your max quota of IP addresses allowed for your space.
 
 To find this information:
@@ -26,7 +29,7 @@ To find this information:
 4. In the Containers tile, information about your IP addresses is listed.
 5. Check that the **Public IPs Requested** field has at least one available IP address.
 
-If you have an IP address available, you're ready to start building your Wish List app. If all of your IP addresses have been used, you will need to release one. In order to release a public IP, install the CF IC plugin, which can be found at the website below.
+If you have an IP address available, you can request a new IP or use an existing available IP to start building your Telecommunications app. If all of your IP addresses have been used, you will need to release one. In either case, to manage your public IP addresses, install the CF IC plugin, which can be found at the website below.
 
 https://www.ng.bluemix.net/docs/containers/container_cli_ov.html#container_cli_cfic_installs
 
@@ -38,20 +41,44 @@ Once installed:
 2. List your current external IP addresses.
 
   `cf ic ip list`
-3. Release an IP address.
+3. If the list of external IP addresses contains an unused address, you can use that one for this solution.
+4. If you are not at your limit of IP addresses and want a new one, request an IP address.
 
-  `cf ic ip release <public IP>`
-  
+  `cf ic ip request`
+5. If you need to make an IP address available, release an IP address currently in use.
 
-## Download solution files
-The files required for this solution are here on this GitHub repository and a zip file of the IBM MobileFirst Platform Foundation for containers
+  `cf ic ip release <public IP>`  
 
-### Download IBM MobileFirst Platform Foundation server for containers
-The IBM MobileFirst Platform Foundation project contains source code and scripts needed to build and deploy an MFPF server on IBM containers. Using this project allows any MobileFirst runtime environment to be included in the IBM container. The zip file includes separate installation packages for the MobileFirst Operations Console and the MobileFirst Analytics Console. For the purposes of this solution, you only need the Operations Console to get the mobile app up and running.
+## Download IBM MobileFirst Platform Foundation for IBM containers
+The IBM MobileFirst Platform Foundation for IBM Containers zip archive contains source code and scripts needed to build and deploy an MFPF server on IBM containers. It is first built locally, and then pushed to IBM Containers on Bluemix. Using this project allows any MobileFirst runtime environment to be included in the IBM container. The zip file includes separate installation packages for the MobileFirst Operations Console and the MobileFirst Analytics Console. For the purposes of this solution, you only need the Operations Console to get the mobile app up and running.
 
-[Download](https://ibm.box.com/shared/static/z1cvv2p6sx90jbwdq1h68wziwhnnd55h.zip) the zip file from IBM Box and unzip it.
+For more information about the IBM MobileFirst Foundation Platfom on IBM Containers, see [https://developer.ibm.com/mobilefirstplatform/documentation/getting-started-7-1/bluemix/run-foundation-on-bluemix](https://developer.ibm.com/mobilefirstplatform/documentation/getting-started-7-1/bluemix/run-foundation-on-bluemix).
 
-### Clone IBM ReadyApp for Telecommunications GitHub repository
+1. [Review license and download Zip file](http://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-BVID-9XEQG7&accepted_url=http://public.dhe.ibm.com/ibmdl/export/pub/software/products/en/MobileFirstPlatform/mfpfcontainers/ibm-mfpf-container-7.1.0.0-eval.zip)
+2. Once you have agreed to the license and downloaded the zip, extract the contents of the zip.
+
+### Updating Dockerfiles for Java version
+In the ibm-mfpf-container-7.1.0.0-eval/mfpf-server and ibm-mfpf-container-7.1.0.0-eval/mfpf-analytics folders, there are Dockerfiles that are used to create the containers. These Dockerfiles refer to a version of Java that is included in the dependencies folder. Since you build .war, .adapter, and .wlapp files on your local machine, to avoid Java version incompatibilities, you may need to match Java versions for your local machine with the version used to create the container.
+
+One option is to update the Dockerfiles to install a different version of Java. 
+For example, to install Oracle Java 8 you can comment out these lines in the Dockerfile:
+	
+	ADD dependencies/ibm-java-jre-7.1-3.10-linux-x86_64.tgz /opt/ibm/    
+	ENV JAVA_HOME /opt/ibm/ibm-java-x86_64-71
+	
+And add in:
+
+	RUN \
+	  echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+	  add-apt-repository -y ppa:webupd8team/java && \
+	  apt-get update && \
+	  apt-get install -y oracle-java8-installer && \
+	  rm -rf /var/lib/apt/lists/* && \
+	  rm -rf /var/cache/oracle-jdk8-installer
+
+	ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+
+## Clone IBM ReadyApp for Telecommunications GitHub repository
 This repository contains the updated solution for the IBM ReadyApp for Telecommunications to work with Bluemix containers as well as the source code for the app itself. Clone this with the following git command.
 	
   `git clone https://github.com/cfsworkload/mobileTelco.git`
@@ -103,7 +130,18 @@ The IBM MobileFirstFirst Platform Command Line Interface tool is used to easily 
 3. Select and run the installer that is appropriate for your platform. A GUI appears and guides you through the installation of Command Line Interface. Follow the instructions to complete your installation.
 4. On completion of the installation, log out from the OS, and then log back in. This action ensures that the appropriate commands are on your system path.
 
-When the MobileFirst CLI is installed, you should be able to run mfp commands. The MobileFirst-CLI directory should be in the PATH environment variable to allow access to the mfp command. i.e. PATH=$PATH:/Applications/IBM/MobileFirst-CLI
+When the MobileFirst CLI is installed, you should be able to run mfp commands if the MobileFiorst CLI directory is in the PATH environment variable. i.e. PATH=$PATH:/Applications/IBM/MobileFirst-CLI
+
+#### Create a local mfpf server
+To run some mfp commands a local server must first exist. If you do not already have a local server, follow these steps.
+
+1. Run the following command to add a server:
+
+	`mfp server add`
+2. Select the local server option to create the local server.
+3. Check you list of servers to make sure the server was created.
+
+	`mfp server info`
 
 ## Create the MobileFirst server files
 To have a MobileFirst project run on a MobileFirst server, a runtime environment must be included on the server. This is done by adding a .war file for the MobileFirst project to the server.  Files created in this section are created in the TelcoReadyAppMFP/bin folder.
@@ -124,7 +162,7 @@ To create these files, in your bash terminal, go to your MobileFirst project fol
   
 If you had a MobileFirst server running locally, it would create the necessary files(.war, .wlapp) and push them to the server. An error may appear if you do not have a local mfp server running, but the files are still created. All files must be compiled with the same or lower version of Java than what the server was built.
 
-## Set Telco Android app properties file 
+## Update Telco Android app properties files 
 
 Enter your own keys in these files:
 
@@ -147,13 +185,16 @@ mqaKey: (Optional) This is the key for the Mobile Quality Assurance Bluemix serv
 4. Click **Add Platform** to the right of the application and choose a platform.
 5. Click **Show App Key** to get the MQA key and add it to the secrets.xml file
 
-encodedTwitterKey: This encoded key and the next encoded value enables the app to send Twitter messages.
+encodedTwitterKey: This encoded key and the next encoded value enables the app to send Twitter messages. 
 
 1. [Log in](https://get.fabric.io/) to the twitter fabric console.
-2. Create a Twitter application in the console or use an existing one.
-3. Get the application key for your application form the Twitter fabric console.
-4. Encode the Twitter key using a [base 64 encoder](https://www.base64encode.org/).
-5. Paste the encoded version of the application key in the secrets.xml file.
+2. Create a Twitter application in the console or use an existing one. To create a new application, follow the instructions on fabric.io for installing the Fabric plugin on Android Studio.
+3. With the Android project open in Android Studio, press the Fabric toolbar button, select your Android project, then click **Next**.
+4. Select your organization and click **Next**.
+5. Select the Twitter Kit from the list of All Kits and follow the steps to complete installation and Twitter account creation for the app.
+6. Once the app has run and verified with Fabric, you can get the application key for your application from the Twitter fabric console on the fabric.io website. 
+7. Encode the Twitter key using a [base 64 encoder](https://www.base64encode.org/).
+8. Paste the encoded version of the application key in the secrets.xml file.
 
 encodedTwitterSecret: This encoded value is also required to enable the app to send Twitter messages.
 
@@ -170,48 +211,68 @@ analyticsKey: This is the Google analytics key.
 
 **wlclient.properties**: This properties file contains information about the app ID and version as well as the MobileFirst server host and port. For the purposes of this solution, only the wlServerHost property needs to be updated.
 
-- wlServerHost: The IP address of your MobileFirst server container.
-
-- wlServerPort: The port of the MobileFirst server. The default value is 9080 as it is defined in the MobileFirst server configuration.
-
+- wlServerHost: The IP address of your MobileFirst server container. Use the available IP address that you acquired earlier.
+- wlServerPort: The port of the MobileFirst server. The default value is 9080 as it is defined in the MobileFirst server configuration. For purposes of this walkthrough, use the default value.
 - wlAppId: Your application id. This can be found in the application-descriptor.xml file located in the following directory: /TelcoReadyAppMFP/apps/TelcoReadyAppAndroid/ (Ex: myApp)
-
-- wlAppVersion: Your application version. This can also be found in the application-descriptor.xml file located in the following directory: /TelcoReadyAppMFP/apps/TelcoReadyAppAndroid/ (Ex: 1.0)
+- wlAppVersion: Your application version. This can also be found in the application-descriptor.xml file located in the following directory: /TelcoReadyAppMFP/apps/TelcoReadyAppAndroid/ (i.e. 1.0)
 
 
 ## Update MobileFirst server configuration files
 
-In the args folder are a set of configuration files which contain the properties that are required to run the scripts. Fill in the arguments’ values in the following files:
+In the ibm-mfpf-container-7.1.0.0-eval/mfpf-server/scripts/args folder are a set of configuration files which contain the properties that are required to run the scripts without . Fill in the arguments’ values in the following files:
 
 **initenv.properties** - This file defines the properties needed for the initenv.sh script which initializes the Bluemix environment.
 
-- BLUEMIX_API_URL – Bluemix API endpoint. The default is https://api.ng.bluemix.net.
-- BLUEMIX_REGISTRY – The IBM Containers registry domain. The default is registry.ng.bluemix.net.
-- BLUEMIX_CCS_HOST – The IBM Container Cloud Service Host. The default is https://containers-api.ng.bluemix.net/v3/containers.
-- BLUEMIX_USER – Your Bluemix username (email).
-- BLUEMIX_PASSWORD – Your Bluemix password.
-- BLUEMIX_ORG – Your Bluemix organization name.
-- BLUEMIX_SPACE – Your Bluemix space (as explained previously).
+- BLUEMIX_API_URL - Bluemix API endpoint. The default is https://api.ng.bluemix.net. Uncomment this line if changes need to be made to this value.
+- BLUEMIX_REGISTRY - The IBM Containers registry domain. The default is registry.ng.bluemix.net. Uncomment this line if changes need to be made to this value.
+- BLUEMIX_CCS_HOST - The IBM Container Cloud Service Host. The default is https://containers-api.ng.bluemix.net/v3/containers. Uncomment this line if changes need to be made to this value.
+- BLUEMIX_USER - Your Bluemix username (email).
+- BLUEMIX_PASSWORD - Your Bluemix password.
+- BLUEMIX_ORG - Your Bluemix organization name.
+- BLUEMIX_SPACE - Your Bluemix space.
 
 **prepareserverdbs.properties** - This defines the properties needed to run the prepareserverdbs.sh which configures the management and runtime databases for the MobileFirst Platform projects.
 
-- DB_SRV_NAME – Your Bluemix DB service instance name.
-- APP_NAME – Your Bluemix DB application name. Note: Choose a unique name.
-- RUNTIME_NAME – The MobileFirst project runtime name. Required for configuring runtime databases only, as explained in the next step. The name of the runtime should match the name of the .war file created by the MobileFirst CLI. e.g. TelcoReadyAppMFP
+- DB_TYPE - The Bluemix Database service type. Set this to **cloudantNoSQLDB** since this set up requires a Cloudant database.
+- DB_SRV_NAME - Your Bluemix DB service instance name.
+- DB_SRV_PLAN - This is the Bluemix database service plan type. Set this to **Shared** since this set up uses a Cloudant database.
+- APP_NAME - Your Bluemix DB application name. Note: Choose a unique name.
+- RUNTIME_NAME - The MobileFirst project runtime name. Required for configuring runtime databases only, as explained in the prepareserverdbs.sh step. The first use of this file by the prepareserverdbs.sh script requires the property to be commented out to the admin database. After that, it is uncommented out for the runtime database(s). The name of the runtime should match the name of the .war file created by the MobileFirst CLI. e.g. TelcoReadyAppMFP 
 
 **prepareserver.properties** - This defines the properties needed to run the perpareserver.sh script which creates the MobileFirst Platform Foundation server image and pushes it to the IBM Bluemix container registry.
 
-- SERVER_IMAGE_TAG – A tag for the image. Should be of the form: registry-url/namespace/your-tag. Same as in startserver.properties.
-- PROJECT_LOC – A path to the root directory of your MobileFirst project. Multiple project locations can be delimited by a comma. For this solution, enter the full directory location of IBM-Ready-App-for-Telecommunications/TelcoReadyAppMFP.
+- SERVER_IMAGE_TAG - A tag for the image. Should be of the form: registry-url/namespace/your-tag. Same as in startserver.properties.
+- PROJECT_LOC - A path to the root directory of your MobileFirst project. Multiple project locations can be delimited by a comma. For this solution, uncomment out this property and enter the full directory location of IBM-Ready-App-for-Telecommunications/TelcoReadyAppMFP.
 
 **startserver.properties** - This defines the properties to run the IBM MobileFirst Platform Foundation server image on an IBM Bluemix container service.
 
-- SERVER_IMAGE_TAG – A tag for the image. Should be of the form: registry-url/namespace/your-tag. Same as in prepareserver.properties.
-- SERVER_CONTAINER_NAME – A name for your Bluemix Container.
-- SERVER_IP – An IP address that the Bluemix Container should be bound to. Use the IP address that you acquired earlier.
+- SERVER_IMAGE_TAG - A tag for the image. Should be of the form: registry-url/namespace/your-tag. Same as in prepareserver.properties.
+- SERVER_CONTAINER_NAME - A name for your Bluemix Container.
+- SERVER_IP - An IP address that the Bluemix Container should be bound to. Use the IP address that you acquired earlier.
 
 ## Run the scripts to build and deploy
-The scripts found in the mfpf-server/scripts directory use the properties set in the previous section to build and deploy the MobileFirst server with the Telecommunications runtime environment. These scripts mustrun in the bash shell or they may not run as expected.
+The scripts found in the mfpf-server/scripts directory use the properties set in the previous section to build and deploy the MobileFirst server with the Telecommunications runtime environment. These scripts must run in the bash shell or they may not run as expected.
+
+### Prerequisite setup
+Before you run the scripts, there are a few steps to make sure these scripts can run properly.
+
+1. Make sure you are logged into IBM Container Cloud Service.
+
+	`cf ic login`
+2. Make sure that the namespace for container registry is set. The namespace is a unique name to identify your private repository on the Bluemix registry. The namespace is assigned once for an organization and cannot be changed.
+Choose a namespace according to following rules:
+
+	- It can contain only lowercase letters, numbers, or underscores (_).
+	- It can be 4 – 30 characters. If you plan to manage containers from the command line, you might prefer to have a short namespace that can be typed quickly.
+	- It must be unique in the Bluemix registry.
+
+	To set a namespace, run the command:
+
+	`cf ic namespace set <new_name>`
+
+	To get the namespace that you have set, run the command:
+
+	`cf ic namespace get`
 
 ### installcontainercli.sh – Adding Container Extension to the MobileFirst CLI
 In order to use the Container Extension you must first add it to the MobileFirst CLI. Before running this script, make sure the Docker daemon is running, JAVA_HOME attribute is set, and the MobileFirst CLI path is set.
