@@ -219,47 +219,15 @@ analyticsKey: This is the Google analytics key.
 
 ## Update MobileFirst server configuration files
 
-In the ibm-mfpf-container-7.1.0.0-eval/mfpf-server/scripts/args folder are a set of configuration files which contain the properties that are required to run the scripts without . Fill in the arguments’ values in the following files:
-
-**initenv.properties** - This file defines the properties needed for the initenv.sh script which initializes the Bluemix environment.
-
-- BLUEMIX_API_URL - Bluemix API endpoint. The default is https://api.ng.bluemix.net. Uncomment this line if changes need to be made to this value.
-- BLUEMIX_REGISTRY - The IBM Containers registry domain. The default is registry.ng.bluemix.net. Uncomment this line if changes need to be made to this value.
-- BLUEMIX_CCS_HOST - The IBM Container Cloud Service Host. The default is https://containers-api.ng.bluemix.net/v3/containers. Uncomment this line if changes need to be made to this value.
-- BLUEMIX_USER - Your Bluemix username (email).
-- BLUEMIX_PASSWORD - Your Bluemix password.
-- BLUEMIX_ORG - Your Bluemix organization name.
-- BLUEMIX_SPACE - Your Bluemix space.
-
-**prepareserverdbs.properties** - This defines the properties needed to run the prepareserverdbs.sh which configures the management and runtime databases for the MobileFirst Platform projects.
-
-- DB_TYPE - The Bluemix Database service type. Set this to **cloudantNoSQLDB** since this set up requires a Cloudant database.
-- DB_SRV_NAME - Your Bluemix DB service instance name.
-- DB_SRV_PLAN - This is the Bluemix database service plan type. Set this to **Shared** since this set up uses a Cloudant database.
-- APP_NAME - Your Bluemix DB application name. Note: Choose a unique name.
-- RUNTIME_NAME - The MobileFirst project runtime name. Required for configuring runtime databases only, as explained in the prepareserverdbs.sh step. The first use of this file by the prepareserverdbs.sh script requires the property to be commented out to the admin database. After that, it is uncommented out for the runtime database(s). The name of the runtime should match the name of the .war file created by the MobileFirst CLI. e.g. TelcoReadyAppMFP 
-
-**prepareserver.properties** - This defines the properties needed to run the perpareserver.sh script which creates the MobileFirst Platform Foundation server image and pushes it to the IBM Bluemix container registry.
-
-- SERVER_IMAGE_TAG - A tag for the image. Should be of the form: registry-url/namespace/your-tag. Same as in startserver.properties.
-- PROJECT_LOC - A path to the root directory of your MobileFirst project. Multiple project locations can be delimited by a comma. For this solution, uncomment out this property and enter the full directory location of IBM-Ready-App-for-Telecommunications/TelcoReadyAppMFP.
-
-**startserver.properties** - This defines the properties to run the IBM MobileFirst Platform Foundation server image on an IBM Bluemix container service.
-
-- SERVER_IMAGE_TAG - A tag for the image. Should be of the form: registry-url/namespace/your-tag. Same as in prepareserver.properties.
-- SERVER_CONTAINER_NAME - A name for your Bluemix Container.
-- SERVER_IP - An IP address that the Bluemix Container should be bound to. Use the IP address that you acquired earlier.
-
-## Run the scripts to build and deploy
-The scripts found in the mfpf-server/scripts directory use the properties set in the previous section to build and deploy the MobileFirst server with the Telecommunications runtime environment. These scripts must run in the bash shell or they may not run as expected.
+In the ibm-mfpf-container-7.1.0.0-eval/mfpf-server/scripts/args folder are a set of configuration files which contain the properties that are required to run the scripts without user interactive input.
 
 ### Prerequisite setup
-Before you run the scripts, there are a few steps to make sure these scripts can run properly.
+Before you run the update the properties files and scripts, there are a few steps to make sure these scripts can run properly.
 
 1. Make sure you are logged into IBM Container Cloud Service.
 
 	`cf ic login`
-2. Make sure that the namespace for container registry is set. The namespace is a unique name to identify your private repository on the Bluemix registry. The namespace is assigned once for an organization and cannot be changed.
+2. Make sure that the namespace for container registry is set. The namespace is a unique name to identify your private repository on the Bluemix registry. This will be used in the properties files. The namespace is assigned once for an organization and cannot be changed.
 Choose a namespace according to following rules:
 
 	- It can contain only lowercase letters, numbers, or underscores (_).
@@ -273,6 +241,41 @@ Choose a namespace according to following rules:
 	To get the namespace that you have set, run the command:
 
 	`cf ic namespace get`
+	
+### Properties Files
+Fill in the property values in the following files:
+
+**initenv.properties** - This file defines the properties needed for the initenv.sh script which initializes the Bluemix environment.
+
+- BLUEMIX_API_URL - Bluemix API endpoint. The default is https://api.ng.bluemix.net. Uncomment this line if changes need to be made to this value.
+- BLUEMIX_REGISTRY - The IBM Containers registry domain. The default is registry.ng.bluemix.net. Uncomment this line if changes need to be made to this value.
+- BLUEMIX_CCS_HOST - The IBM Container Cloud Service Host. The default is https://containers-api.ng.bluemix.net/v3/containers. Uncomment this line if changes need to be made to this value.
+- BLUEMIX_USER - Your Bluemix username (email).
+- BLUEMIX_PASSWORD - Your Bluemix password.
+- BLUEMIX_ORG - Your Bluemix organization name.
+- BLUEMIX_SPACE - Your Bluemix space. The default space you create when creating a Bluemix account is usually **dev**.
+
+**prepareserverdbs.properties** - This defines the properties needed to run the prepareserverdbs.sh which configures the management and runtime databases for the MobileFirst Platform projects.
+
+- DB_TYPE - The Bluemix Database service type. Set this to **cloudantNoSQLDB** since this set up requires a Cloudant database.
+- DB_SRV_NAME - Your Bluemix DB service instance name.
+- DB_SRV_PLAN - This is the Bluemix database service plan type. Set this to **Shared** since this set up uses a Cloudant database.
+- APP_NAME - Your Bluemix DB application name. Note: Choose a unique name.
+- RUNTIME_NAME - The MobileFirst project runtime name. Required for configuring runtime databases only, as explained in the prepareserverdbs.sh step. The first use of this file by the prepareserverdbs.sh script requires the property to be commented out to the admin database. After that, it is uncommented out for the runtime database(s). The name of the runtime should match the name of the .war file created by the MobileFirst CLI. e.g. TelcoReadyAppMFP 
+
+**prepareserver.properties** - This defines the properties needed to run the perpareserver.sh script which creates the MobileFirst Platform Foundation server image and pushes it to the IBM Bluemix container registry.
+
+- SERVER_IMAGE_TAG - A tag for the image. Should be of the form: registry-url/namespace/your-tag. Same as in startserver.properties. e.g. registry.ng.bluemix.net/mynamespace/mfpserver71:latest
+- PROJECT_LOC - A path to the root directory of your MobileFirst project. Multiple project locations can be delimited by a comma. For this solution, uncomment out this property and enter the full directory location of IBM-Ready-App-for-Telecommunications/TelcoReadyAppMFP.
+
+**startserver.properties** - This defines the properties to run the IBM MobileFirst Platform Foundation server image on an IBM Bluemix container service.
+
+- SERVER_IMAGE_TAG - A tag for the image. Should be of the form: registry-url/namespace/your-tag. Same as in prepareserver.properties. e.g. registry.ng.bluemix.net/mynamespace/mfpserver71:latest
+- SERVER_CONTAINER_NAME - A name for your Bluemix Container. Give this property a unique name.
+- SERVER_IP - An IP address that the Bluemix Container should be bound to. Use the IP address that you acquired earlier.
+
+## Run the scripts to build and deploy
+The scripts found in the mfpf-server/scripts directory use the properties set in the previous section to build and deploy the MobileFirst server with the Telecommunications runtime environment. These scripts must run in the bash shell or they may not run as expected.
 
 ### installcontainercli.sh – Adding Container Extension to the MobileFirst CLI
 In order to use the Container Extension you must first add it to the MobileFirst CLI. Before running this script, make sure the Docker daemon is running, JAVA_HOME attribute is set, and the MobileFirst CLI path is set.
