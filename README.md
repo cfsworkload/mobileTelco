@@ -139,6 +139,9 @@ To run some mfp commands a local server must first exist. If you do not already 
 3. Check you list of servers to make sure the server was created.
 
 	`mfp server info`
+4. Start your local mfp server so additional mfp commands, such as mfp push, can be run.
+
+	`mfp start`
 
 ## Create the MobileFirst server files
 To have a MobileFirst project run on a MobileFirst server, a runtime environment must be included on the server. This is done by adding a .war file for the MobileFirst project to the server.  Files created in this section are created in the TelcoReadyAppMFP/bin folder.
