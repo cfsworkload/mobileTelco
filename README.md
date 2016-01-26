@@ -185,23 +185,6 @@ mqaKey: (Optional) This is the key for the Mobile Quality Assurance Bluemix serv
 4. Click **Add Platform** to the right of the application and choose a platform.
 5. Click **Show App Key** to get the MQA key and add it to the secrets.xml file
 
-encodedTwitterKey: This encoded key and the next encoded value enables the app to send Twitter messages. 
-
-1. [Log in](https://get.fabric.io/) to the twitter fabric console.
-2. Create a Twitter application in the console or use an existing one. To create a new application, follow the instructions on fabric.io for installing the Fabric plugin on Android Studio.
-3. With the Android project open in Android Studio, press the Fabric toolbar button, select your Android project, then click **Next**.
-4. Select your organization and click **Next**.
-5. Select the Twitter Kit from the list of All Kits and follow the steps to complete installation and Twitter account creation for the app.
-6. Once the app has run and verified with Fabric, you can get the application key for your application from the Twitter fabric console on the fabric.io website. 
-7. Encode the Twitter key using a [base 64 encoder](https://www.base64encode.org/).
-8. Paste the encoded version of the application key in the secrets.xml file.
-
-encodedTwitterSecret: This encoded value is also required to enable the app to send Twitter messages.
-
-1. Get the application secret for your application form the twitter fabric console.
-2. Encode the application secret using a [base 64 encoder](https://www.base64encode.org/).
-3. Paste the encoded version of the application secret in the secrets.xml file.
-
 analyticsKey: This is the Google analytics key.
 
 1. Log in to Google analytics at http://www.google.com/analytics/ and create an application.
