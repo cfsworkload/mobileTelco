@@ -1,6 +1,6 @@
 # Mobile Telecommunications
 
-IBM Ready App for Telecommunications demonstrates a new genre of mobile service provider where plans are controlled by the end user and not limited to a few choices. These dynamic service providers are starting to emerge all around the world. The app empowers the customer to control their mobile voice, text, and data plan while empowering the service provider to provide the right offers at the right time. Combining this with MobileFirst Platform Foundation for IBM Containers allows providers to control offers with Bluemix services.
+IBM Ready App for Telecommunications demonstrates a new genre of mobile service provider where plans are controlled by the end user and not limited to a few choices. These dynamic service providers are starting to emerge all around the world. The app empowers the customer to control their mobile voice, text, and data plan while empowering the service provider to provide the right offers at the right time. Combining this with MobileFirst Platform Foundation for IBM Containers allows providers to maintain the backend solution with Bluemix services.
 
 #### Prerequisite Software
 - **Android Studio** - To install the app on an Android phone or run it in an Android emulator, install Android Studio from http://developer.android.com/sdk/index.html.
