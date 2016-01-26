@@ -134,8 +134,8 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         updateFABForMyPlanTab();
         setImageHighlight(planTabImage);
         subscribeForToolbarCostUpdates();
-
-        // configure and start MQA
+/*
+        // configure and start MQA. This section commented out due to paid services with MQA.
         String MQA_KEY = getString(R.string.mqaKey);
         Configuration configuration = new Configuration.Builder(this)
                 .withAPIKey(MQA_KEY)
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         if (startMQA) {
             MQA.startNewSession(this, configuration);
         }
-
+*/
         // connect to MFP and register ChallengeHandler
         CafeJava.connect(this)
                 .subscribe(new Action1<WLResponse>() {
