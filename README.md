@@ -46,12 +46,12 @@ Once installed:
 
   `cf ic ip release <public IP>`  
 
-## Download IBM MobileFirst Platform Foundation for IBM containers
+## Download IBM MobileFirst Platform Foundation for IBM Containers
 The IBM MobileFirst Platform Foundation for IBM Containers zip archive contains source code and scripts needed to build and deploy an MFPF server on IBM containers. It is first built locally, and then pushed to IBM Containers on Bluemix. Using this project allows any MobileFirst runtime environment to be included in the IBM container. The zip file includes separate installation packages for the MobileFirst Operations Console and the MobileFirst Analytics Console. For the purposes of this solution, you only need the Operations Console to get the mobile app up and running.
 
 For more information about the IBM MobileFirst Foundation Platfom on IBM Containers, see [https://developer.ibm.com/mobilefirstplatform/documentation/getting-started-7-1/bluemix/run-foundation-on-bluemix](https://developer.ibm.com/mobilefirstplatform/documentation/getting-started-7-1/bluemix/run-foundation-on-bluemix).
 
-1. [Review license and download Zip file](http://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-BVID-9XEQG7&accepted_url=http://public.dhe.ibm.com/ibmdl/export/pub/software/products/en/MobileFirstPlatform/mfpfcontainers/ibm-mfpf-container-7.1.0.0-eval.zip)
+1. [Review license and download zip file.](http://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-BVID-9XEQG7&accepted_url=http://public.dhe.ibm.com/ibmdl/export/pub/software/products/en/MobileFirstPlatform/mfpfcontainers/ibm-mfpf-container-7.1.0.0-eval.zip)
 2. Once you have agreed to the license and downloaded the zip, extract the contents of the zip.
 
 ### Updating Dockerfiles for Java version
@@ -100,7 +100,7 @@ IBM MobileFirst Platform Studio is an Eclipse plug-in that helps you quickly bui
 5. Select **I accept the terms of the license agreements** and click **Finish**.
 6. Restart Eclipse to complete the installation of IBM MobileFirst Platform Studio 7.1.0.
  
-### Import project into Eclipse
+### Import the project into Eclipse
 In Eclipse, import the TelcoReadyAppMFP folder into the Eclipse workspace to access CloudantService.java for the next section.
 
 1. First, go back to your Eclipse IDE and change your view to the Package Explorer. This can be accessed by going to **Window** > **Show View** > **Other** > **General** > **Project Explorer**. This will open up the Project Explorer in the left panel of your Eclipse workspace. 
