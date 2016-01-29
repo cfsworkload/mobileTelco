@@ -9,14 +9,14 @@ IBM Ready App for Telecommunications demonstrates a new genre of mobile service 
 - **[Eclipse](https://eclipse.org/downloads/) Luna v4.4.2 or higher** - Eclipse is needed to run a java application to upload hotspot data to the Cloudant Geo database. When installing Eclipse, select Eclipse IDE for Java EE Developers.
 
 #### Other Notes
-- The IBM MobileFirst Platform Foundation on IBM Containers does not currently run Windows OS but a virtual machine with Linux can be used to run the scripts.
+- The IBM MobileFirst Platform Foundation on IBM Containers does not currently run a Windows OS but a virtual machine with Linux can be used to run the scripts.
 
 ## Sign up and log into Bluemix and DevOps
 Sign up for Bluemix at https://console.ng.bluemix.net and DevOps Services at https://hub.jazz.net. When you sign up, you'll create an IBM ID, create an alias, and register with Bluemix.
 
 
 ## Get a public IP in your Bluemix space
-This solution requires a free public IP. In order to determine if a public IP is available, you need to find the number of used and your max quota of IP addresses allowed for your space.
+This solution requires a free public IP address. In order to determine if a public IP is available, you need to find the number of used and your max quota of IP addresses allowed for your space.
 
 To find this information:
 
@@ -76,7 +76,7 @@ And add in:
 	ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
 ## Clone IBM ReadyApp for Telecommunications GitHub repository
-This repository contains the updated solution for the IBM ReadyApp for Telecommunications to work with Bluemix containers as well as the source code for the app itself. Clone this with the following git command.
+This repository contains the updated solution for the IBM ReadyApp for Telecommunications to work with Bluemix containers as well as the source code for the app itself. Clone this with the following Git command.
 	
   `git clone https://github.com/cfsworkload/mobileTelco.git`
 
@@ -93,7 +93,7 @@ Create a Cloudant account and database to be accessed and populated with hotspot
 ### Install IBM MobileFirst Platform Studio 7.1.0 Eclipse Plugin
 IBM MobileFirst Platform Studio is an Eclipse plug-in that helps you quickly build, run, and manage mobile web, hybrid, and native apps.
 
-1. Select Help -> Eclipse Marketplace to open the Eclipse Marketplace window.
+1. Select **Help** and then click **Eclipse Marketplace** to open the Eclipse Marketplace window.
 2. In the Find field, enter "MobileFirst" and click **Go** to search for the MobileFirst package.
 3. Find IBM MobleFirst Platform Studio 7.1.0 and click the **Install** button.
 4. Click **Confirm** to proceed with the default selected items.
@@ -103,11 +103,11 @@ IBM MobileFirst Platform Studio is an Eclipse plug-in that helps you quickly bui
 ### Import project into Eclipse
 In Eclipse, import the TelcoReadyAppMFP folder into the Eclipse workspace to access CloudantService.java for the next section.
 
-1. First, go back to your Eclipse IDE and change your view to the Package Explorer. This can be accessed via Window > Show View > Other > General > Project Explorer. This will open up the Project Explorer in the left panel of your Eclipse workspace. 
-2. Next, right-click on the Package Explorer and choose **Import** -> **Import**. 
-3. In the resulting dialog, find and expand the General folder and select Existing Projects into Workspace. 
+1. First, go back to your Eclipse IDE and change your view to the Package Explorer. This can be accessed by going to **Window** > **Show View** > **Other** > **General** > **Project Explorer**. This will open up the Project Explorer in the left panel of your Eclipse workspace. 
+2. Next, right-click on the Package Explorer and choose **Import**. 
+3. In the resulting dialog, find and expand the General folder and select **Existing Projects into Workspace**. 
 4. Now, select **Next** and navigate to location where you have saved the Telco source code. 
-5. Finally, choose the TelcoReadyAppMFP folder in the resulting dialog and choose **Finish** to complete the import.
+5. Finally, choose the TelcoReadyAppMFP folder in the resulting dialog and click **Finish** to complete the import.
 
 ### Populate database with data
 1. Go to server/java/resources/app.properties and change the values to reflect your account and password and database name.
@@ -188,7 +188,7 @@ mqaKey: (Optional) This is the key for the Mobile Quality Assurance Bluemix serv
 analyticsKey: This is the Google analytics key.
 
 1. Log in to Google analytics at http://www.google.com/analytics/ and create an application.
-2. Find the Tracking ID under Admin > Property Settings
+2. Find the Tracking ID by clicking **Admin** then **Property Settings**.
 3. Replace the placeholder text in the secrets.xml by this Tracking ID.
 
 
@@ -285,7 +285,7 @@ The prepareserverdbs.sh script is used to configure your MobileFirst project dat
 	
   `./prepareserverdbs.sh args/prepareserverdbs.properties`
 
-Note: If you are getting an error: “Application not configured correctly” – try to run the script (with the same properties) again.
+Note: If you get the error "Application not configured correctly", try to run the script with the same properties again.
 
 ### prepareserver.sh – Prepare a Mobilefirst Platform Foundation Server image
 Uncomment the PROJECT_LOC argument and run the prepareserver.sh script in order to build a MobileFirst Platform Foundation Server image, deploy your project runtime and push it to to your Bluemix repository:
@@ -299,25 +299,25 @@ To view all available images in your Bluemix repository run:
 The list contains the image name, date of creation and ID.
 
 ### startserver.sh – Running the image on an IBM Container
-The startserver.sh script is used to run the Mobilefirst Server image on an IBM Container. It also Binds your image to the public IP you configured in the SERVER_IP property.
+The startserver.sh script is used to run the Mobilefirst Server image on an IBM Container. It also binds your image to the public IP you configured in the SERVER_IP property.
 
   `./startserver.sh args/startserver.properties`
 
 Once the container has started, follow the steps below to add the app and adapters.
    
-1. Launch the MobileFirst Console by loading the following URL: http://<server_ip>:9080/worklightconsole (it may take a few moments). The default login/password combination is admin/admin.
-2. Upload the .wlapp and .adapter files by clicking on the **Add new app or adapter** button and selecting the files from your TelcoReadyAppMFP/bin directory.
+1. Launch the MobileFirst Console by loading the following URL: http://<server_ip>:9080/worklightconsole. This may take a few minutes. The default login/password combination is admin/admin.
+2. Upload the .wlapp and .adapter files by clicking **Add new app or adapter** and selecting the files from your TelcoReadyAppMFP/bin directory.
 3. Update the application’s worklight.plist (for iOS) and/or wlclient.properties (for Android, Windows Universal, Windows Phone) with the protocol, host and port values of the IBM Container.
 4. You can now run your application to verify that it successfully connects to the MobileFirst Server, running on IBM Containers.
 
 
-## Install App on Android Devices
+## Install the App on Android Devices
 
 Compile and Run the android project on an Android emulator or Android device to see the app in action.
 1. Start Android Studio.
-2. Click the Quick Start option, “Open an existing Android Studio project”.
-3. Navigate to the cloned repository folder, IBM-Ready-App-for-Telecommunications, and select the TelcoReadyAppAndroid folder. Then click the Choose button.
-4. Once the new project is done loading into Android Studio, you can click the Run button at the top to compile and run the app on an Android device connected to your computer. 
+2. Click the Quick Start option, **Open an existing Android Studio project**.
+3. Navigate to the cloned repository folder, **IBM-Ready-App-for-Telecommunications**, and select the **TelcoReadyAppAndroid** folder. Then click **Choose**.
+4. Once the new project is done loading into Android Studio, click the **Run** at the top to compile and run the app on an Android device connected to your computer. 
 
 Note: If you are new to Android development, you may need to go into your device settings and enable USB debugging for your computer to recognize the device. Also, when using Android Studio, if you use the emulator instead of an Android device, no other Virtual Machines can be running, including the Docker daemon.
 
