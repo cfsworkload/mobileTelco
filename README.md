@@ -1,4 +1,4 @@
-# Mobile Telecommunications
+# Data Plan Manager
 
 IBM Ready App for Telecommunications demonstrates a new genre of mobile service provider where plans are controlled by the end user and not limited to a few choices. These dynamic service providers are starting to emerge all around the world. The app empowers the customer to control their mobile voice, text, and data plan while empowering the service provider to provide the right offers at the right time. Combining this with MobileFirst Platform Foundation for IBM Containers allows providers to maintain the backend solution with Bluemix services.
 
@@ -164,7 +164,7 @@ If you had a MobileFirst server running locally, it would create the necessary f
 
 ## Update Telco Android app properties files 
 
-Enter your own keys in these files:
+Enter your own keys in these files to set up access to services for the app:
 
 	File Name				 Location
 	secrets.xml			   /TelcoReadyAppAndroid/app/src/main/res/values/
@@ -321,3 +321,4 @@ Compile and Run the android project on an Android emulator or Android device to 
 
 Note: If you are new to Android development, you may need to go into your device settings and enable USB debugging for your computer to recognize the device. Also, when using Android Studio, if you use the emulator instead of an Android device, no other Virtual Machines can be running, including the Docker daemon.
 
+Once you have the app running on your device, you can see the different possibilities the app has for managing data plans and using geospatial data to provide user-specific services. You can customize the TelcoUserAdapterResource.java file for your specific app requirements to handle user data changes. The adapter would then need to be recreated and pushed to the MobileFirst runtime environment.
