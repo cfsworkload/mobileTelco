@@ -183,7 +183,7 @@ mqaKey: (Optional) This is the key for the Mobile Quality Assurance Bluemix serv
 2. Create a Mobile Quality Assurance(MQA) service.
 3. Inside the MQA service dashboard, click New MQA App to create a new app.
 4. Click **Add Platform** to the right of the application and choose a platform.
-5. Click **Show App Key** to get the MQA key and add it to the secrets.xml file
+5. Click **Show App Key** to get the MQA key and add it to the secrets.xml file.
 
 analyticsKey: This is the Google analytics key.
 
@@ -244,7 +244,7 @@ Fill in the property values in the following files:
 - DB_SRV_NAME - Your Bluemix DB service instance name.
 - DB_SRV_PLAN - This is the Bluemix database service plan type. Set this to **Shared** since this set up uses a Cloudant database.
 - APP_NAME - Your Bluemix DB application name. Note: Choose a unique name.
-- RUNTIME_NAME - The MobileFirst project runtime name. Required for configuring runtime databases only, as explained in the prepareserverdbs.sh step. The first use of this file by the prepareserverdbs.sh script requires the property to be commented out to the admin database. After that, it is uncommented out for the runtime database(s). The name of the runtime should match the name of the .war file created by the MobileFirst CLI. e.g. TelcoReadyAppMFP 
+- RUNTIME_NAME - The MobileFirst project runtime name. Required for configuring runtime databases only, as explained in the prepareserverdbs.sh step. The first use of this file by the prepareserverdbs.sh script requires the property to be commented out to the admin database. After that, it is uncommented out for the runtime database(s). The name of the runtime should match the name of the .war file created by the MobileFirst CLI. e.g. TelcoReadyAppMFP. 
 
 **prepareserver.properties** - This defines the properties needed to run the perpareserver.sh script which creates the MobileFirst Platform Foundation server image and pushes it to the IBM Bluemix container registry.
 
@@ -285,7 +285,7 @@ The prepareserverdbs.sh script is used to configure your MobileFirst project dat
 	
   `./prepareserverdbs.sh args/prepareserverdbs.properties`
 
-Note: If you get the error "Application not configured correctly", try to run the script with the same properties again.
+Note: If you get the error "Application not configured correctly", try to run the script again with the same properties.
 
 ### prepareserver.sh – Prepare a Mobilefirst Platform Foundation Server image
 Uncomment the PROJECT_LOC argument and run the prepareserver.sh script in order to build a MobileFirst Platform Foundation Server image, deploy your project runtime and push it to to your Bluemix repository:
