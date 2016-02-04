@@ -34,15 +34,18 @@ Once installed:
 
 1. Log into your Bluemix account and space.
 
-  `cf ic login`  
-2. List your current external IP addresses.
+  `cf login`
+2. Log into the additional cf container functionality.
+
+  `cf ic login` 
+3. List your current external IP addresses.
 
   `cf ic ip list`
-3. If the list of external IP addresses contains an unused address, you can use that one for this solution.
-4. If you are not at your limit of IP addresses and want a new one, request an IP address.
+4. If the list of external IP addresses contains an unused address, you can use that one for this solution.
+5. If you are not at your limit of IP addresses and want a new one, request an IP address.
 
   `cf ic ip request`
-5. If you need to make an IP address available, release an IP address currently in use.
+6. If you need to make an IP address available, release an IP address currently in use.
 
   `cf ic ip release <public IP>`  
 
