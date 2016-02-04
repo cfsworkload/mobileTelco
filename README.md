@@ -35,7 +35,7 @@ Once installed:
 1. Log into your Bluemix account and space.
 
   `cf login`
-2. Log into your Cloud Foundry IBM Containers.
+2. Initialize your IBM Containers CLI.
 
   `cf ic login` 
 3. List your current external IP addresses.
