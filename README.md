@@ -314,7 +314,7 @@ The startserver.sh script is used to run the Mobilefirst Server image on an IBM 
 
 Once the container has started, follow the steps below to add the app and adapters.
    
-1. Launch the MobileFirst Console by loading the following URL: http://<server_ip>:9080/worklightconsole. This may take a few minutes. The default login/password combination is admin/admin.
+1. Launch the MobileFirst Console by loading the following URL: http://&lt;server_ip&gt;:9080/worklightconsole. This may take a few minutes. The default login/password combination is admin/admin.
 2. Upload the .wlapp and .adapter files by clicking **Add new app or adapter** and selecting the files from your TelcoReadyAppMFP/bin directory.
 3. Update the application’s worklight.plist (for iOS) and/or wlclient.properties (for Android, Windows Universal, Windows Phone) with the protocol, host and port values of the IBM Container.
 4. You can now run your application to verify that it successfully connects to the MobileFirst Server, running on IBM Containers.
