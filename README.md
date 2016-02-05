@@ -136,14 +136,15 @@ When the MobileFirst CLI is installed, you should be able to run mfp commands if
 #### Create a local mfpf server
 To run some mfp commands a local server must first exist. If you do not already have a local server, follow these steps.
 
-1. Run the following command to add a server:
+1. At the command line, go to the IBM-Ready-App-for-Telecommunications/TelcoReadyAppMFP directory which is inside of the mobileTelco git repository that you cloned earlier.
+2. Run the following command to add a server:
 
 	`mfp server add`
-2. Select the local server option to create the local server.
-3. Check you list of servers to make sure the server was created.
+3. Select the local server option to create the local server.
+4. Check you list of servers to make sure the server was created.
 
 	`mfp server info`
-4. Start your local mfp server so additional mfp commands, such as mfp push, can be run.
+5. Start your local mfp server so additional mfp commands, such as mfp push, can be run. This may take a moment to start.
 
 	`mfp start`
 
