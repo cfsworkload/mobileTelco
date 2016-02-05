@@ -149,7 +149,9 @@ To run some mfp commands a local server must first exist. If you do not already 
 	`mfp start`
 
 ## Create the MobileFirst server files
-To have a MobileFirst project run on a MobileFirst server, a runtime environment must be included on the server. This is done by adding a .war file for the MobileFirst project to the server.  Files created in this section are created in the TelcoReadyAppMFP/bin folder.
+To have a MobileFirst project run on a MobileFirst server, a runtime environment must be included on the server. This is done by adding a .war file for the MobileFirst project to the server.  Files created in this section are created in the TelcoReadyAppMFP/bin folder. If you started the MFP server locally from the TelcoReadyAppMFP folder using the `mfp start` or the `mfp restart` commands, these files may have been already created during that step.
+The following sections describe alternative methods of creating these files from Eclipse and from the command line. 
+Note that the Eclipse MFP server and the MFP server started from the MobileFirst CLI are separate entities and use the same ports. If you need to use one of those options, make sure the other server is stopped.
 
 ### Create Adapters
 Adapters are server-side Java or Javascript code used to transfer and retrieve information from back-end systems to client applications and cloud services. This solution uses three adapters.
@@ -161,7 +163,7 @@ Adapters are server-side Java or Javascript code used to transfer and retrieve i
 To easily create these files, in Eclipse, for each folder in TelcoReadyAppMFP/adapters, right click on the folder and select **Run As** > **Deploy Mobile First Adapter**. This will create the adapter files in the TelcoReadyAppMFP/bin folder.
 
 ### Create .war and .wlapp files
-To create these files, in your bash terminal, go to your MobileFirst project folder. (i.e. IBM-Ready-App-for-Telecommunications/TelcoReadyAppMFP) From that directory run the MobileFirst CLI command:
+To create these files, in your terminal, go to your MobileFirst project folder. (i.e. IBM-Ready-App-for-Telecommunications/TelcoReadyAppMFP) From that directory run the MobileFirst CLI command:
  
   `mfp push`
   
