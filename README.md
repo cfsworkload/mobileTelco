@@ -5,7 +5,7 @@ IBM Ready App for Telecommunications demonstrates a new genre of mobile service 
 #### Prerequisite Software
 - **Android Studio** - To install the app on an Android phone or run it in an Android emulator, install Android Studio from http://developer.android.com/sdk/index.html.
 - **Java 1.7+** - Java is required to create MobileFirst server files. The version of Java on your machine must also be compatible with the version installed on the IBM container for the MobileFirst server. More about this in a later section. 
-- **Docker and IBM Containers Extension(ice)** - Docker and ice are required to create your MobileFirst server container as defined by a Dockerfile. See the [installation instructions](https://www.ng.bluemix.net/docs/containers/container_cli_ice_ov.html) in Option 2, to install Docker and ice for your operating system.
+- **[Docker](https://docs.docker.com/v1.8/)** - Docker is required to create your MobileFirst server container as defined by a Dockerfile.
 - **[Eclipse](https://eclipse.org/downloads/) Luna v4.4.2 or higher** - Eclipse is needed to run a java application to upload hotspot data to the Cloudant Geo database. When installing Eclipse, select Eclipse IDE for Java EE Developers.
 
 #### Other Notes
@@ -251,9 +251,9 @@ Before you configure these properties, you will first need to create a Cloud Fou
 3. Click the **Liberty for Java** option and click **Continue**.
 4. Enter a unique name for your app and click **Finish**.
 5. At the bottom of the page, click **View App Overview**.
-6. In the overview page click on the **Add a service or API” button.
+6. In the overview page click on the **Add a service or API** button.
 7. Choose the Cloudant NoSQLDB service from the Data and Analytics services section.
-8. Name the service and click **Create**.
+8. Name the service and click **Create**. Note: Do not include spaces in the name of the service.
 9. **Restage** your app.
 
 Using the values entered in the Cloud Foundry App creation for these properties.
