@@ -96,24 +96,25 @@ Create a Cloudant account and database to be accessed and populated with hotspot
 ### Install IBM MobileFirst Platform Studio 7.1.0 Eclipse Plugin
 IBM MobileFirst Platform Studio is an Eclipse plug-in that helps you quickly build, run, and manage mobile web, hybrid, and native apps.
 
-1. Select **Help** and then click **Eclipse Marketplace** to open the Eclipse Marketplace window.
-2. In the Find field, enter "MobileFirst" and click **Go** to search for the MobileFirst package.
-3. Find IBM MobleFirst Platform Studio 7.1.0 and click the **Install** button.
-4. Click **Confirm** to proceed with the default selected items.
-5. Select **I accept the terms of the license agreements** and click **Finish**.
-6. Restart Eclipse to complete the installation of IBM MobileFirst Platform Studio 7.1.0.
+1. Start Eclipse.
+2. Select **Help** and then click **Eclipse Marketplace** to open the Eclipse Marketplace window.
+3. In the Find field, enter "MobileFirst" and click **Go** to search for the MobileFirst package.
+4. Find IBM MobleFirst Platform Studio 7.1.0 and click the **Install** button.
+5. Click **Confirm** to proceed with the default selected items.
+6. Select **I accept the terms of the license agreements** and click **Finish**.
+7. Restart Eclipse to complete the installation of IBM MobileFirst Platform Studio 7.1.0.
  
 ### Import the project into Eclipse
 In Eclipse, import the TelcoReadyAppMFP folder into the Eclipse workspace to access CloudantService.java for the next section.
 
 1. First, go back to your Eclipse IDE and change your view to the Package Explorer. This can be accessed by going to **Window** > **Show View** > **Other** > **General** > **Project Explorer**. This will open up the Project Explorer in the left panel of your Eclipse workspace. 
-2. Next, right-click on the Package Explorer and choose **Import**. 
+2. Next, right-click on the Package Explorer and choose **Import**->**Import**. 
 3. In the resulting dialog, find and expand the General folder and select **Existing Projects into Workspace**. 
 4. Now, select **Next** and navigate to location where you have saved the Telco source code. 
 5. Finally, choose the TelcoReadyAppMFP folder in the resulting dialog and click **Finish** to complete the import.
 
 ### Populate database with data
-1. Go to server/java/resources/app.properties and change the values to reflect your account and password and database name.
+1. Go to server/java/resources/app.properties and change the values to reflect your account and password and database name. The Cloudant account and username are the same value by default.
 2. Navigate to the CloudantService.java class in Eclipse under server/java/com/ibm/mil/cloudant and right click the class and click **Run as Java Application**. This will run main() method in CloudantService which uploads hotspots.json under server/java/resources/db/ to the Cloudant database specified in app.properties
 
 The database is now set up to query using the CloudantGeoAdapter under the MobileFirst Platform.
