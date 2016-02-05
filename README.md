@@ -238,21 +238,32 @@ Fill in the property values in the following files:
 **initenv.properties** - This file defines the properties needed for the initenv.sh script which initializes the Bluemix environment.
 
 - BLUEMIX_API_URL - Bluemix API endpoint. The default is https://api.ng.bluemix.net. Uncomment this line if changes need to be made to this value.
-- BLUEMIX_REGISTRY - The IBM Containers registry domain. The default is registry.ng.bluemix.net. Uncomment this line if changes need to be made to this value.
-- BLUEMIX_CCS_HOST - The IBM Container Cloud Service Host. The default is https://containers-api.ng.bluemix.net/v3/containers. Uncomment this line if changes need to be made to this value.
 - BLUEMIX_USER - Your Bluemix username (email).
 - BLUEMIX_PASSWORD - Your Bluemix password.
 - BLUEMIX_ORG - Your Bluemix organization name.
 - BLUEMIX_SPACE - Your Bluemix space. The default space you create when creating a Bluemix account is usually **dev**.
 
 **prepareserverdbs.properties** - This defines the properties needed to run the prepareserverdbs.sh which configures the management and runtime databases for the MobileFirst Platform projects.
+Before you configure these properties, you will first need to create a Cloud Foundry application with a DB service.
 
-- DB_TYPE - The Bluemix Database service type. Set this to **cloudantNoSQLDB** since this set up requires a Cloudant database.
+1. From the Bluemix Dashboard, click **Create App**.
+2. Click **Web** for the app type.
+3. Click the **Liberty for Java** option and click **Continue**.
+4. Enter a unique name for your app and click **Finish**.
+5. At the bottom of the page, click **View App Overview**.
+6. In the overview page click on the **Add a service or API” button.
+7. Choose the Cloudant NoSQLDB service from the Data and Analytics services section.
+8. Name the service and click **Create**.
+9. **Restage** your app.
+
+Using the values entered in the Cloud Foundry App creation for these properties.
 - DB_SRV_NAME - Your Bluemix DB service instance name.
-- DB_SRV_PLAN - This is the Bluemix database service plan type. Set this to **Shared** since this set up uses a Cloudant database.
 - APP_NAME - Your Bluemix DB application name. Note: Choose a unique name.
 - RUNTIME_NAME - The MobileFirst project runtime name. Required for configuring runtime databases only, as explained in the prepareserverdbs.sh step. The first use of this file by the prepareserverdbs.sh script requires the property to be commented out to the admin database. After that, it is uncommented out for the runtime database(s). The name of the runtime should match the name of the .war file created by the MobileFirst CLI. e.g. TelcoReadyAppMFP. 
-
+- SCHEMA_NAME – Your database schema name. Note: For the sqldb_free plan, the SCHEMA is pre-configured and thus ignored. The default names are:
+ - For the admin database: WLDAMIN
+ - For the MobileFirst project runtime database: the value of RUNTIME_NAME
+ 
 **prepareserver.properties** - This defines the properties needed to run the perpareserver.sh script which creates the MobileFirst Platform Foundation server image and pushes it to the IBM Bluemix container registry.
 
 - SERVER_IMAGE_TAG - A tag for the image. Should be of the form: registry-url/namespace/your-tag. Same as in startserver.properties. e.g. registry.ng.bluemix.net/mynamespace/mfpserver71:latest
@@ -266,15 +277,6 @@ Fill in the property values in the following files:
 
 ## Run the scripts to build and deploy
 The scripts found in the mfpf-server/scripts directory use the properties set in the previous section to build and deploy the MobileFirst server with the Telecommunications runtime environment. These scripts must run in the bash shell or they may not run as expected.
-
-### installcontainercli.sh – Adding Container Extension to the MobileFirst CLI
-In order to use the Container Extension you must first add it to the MobileFirst CLI. Before running this script, make sure the Docker daemon is running, JAVA_HOME attribute is set, and the MobileFirst CLI path is set.
-	
-Run:
-
-  `sudo ./installcontainercli.sh`
-
-Successful completion of this script should result in a 'Done' message.
 
 ### initenv.sh – Logging in to Bluemix
 Run the initenv.sh script in order to create an environment for building and running IBM MobileFirst Platform Foundation on the IBM Containers:
