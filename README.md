@@ -212,7 +212,7 @@ analyticsKey: This is the Google analytics key.
 In the ibm-mfpf-container-7.1.0.0-eval/mfpf-server/scripts/args folder are a set of configuration files which contain the properties that are required to run the scripts without user interactive input.
 
 ### Prerequisite setup
-Before you run the update the properties files and scripts, there are a few steps to make sure these scripts can run properly.
+Before you update the properties files and scripts, there are a few steps to make sure these scripts can run properly.
 
 1. Make sure you are logged into IBM Container Cloud Service.
 
