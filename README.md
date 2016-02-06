@@ -192,7 +192,7 @@ mqaKey: (Optional) This is the key for the Mobile Quality Assurance Bluemix serv
 4. Click **Add Platform** to the right of the application and choose a platform.
 5. Click **Show App Key** to get the MQA key and add it to the secrets.xml file.
 
-analyticsKey: This is the Google analytics key.
+analyticsKey: (Optional)This is the Google analytics key.
 
 1. Log in to Google analytics at http://www.google.com/analytics/ and create an application.
 2. Find the Tracking ID by clicking **Admin** then **Property Settings**.
