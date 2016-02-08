@@ -133,7 +133,7 @@ The IBM MobileFirstFirst Platform Command Line Interface tool is used to easily 
 
 When the MobileFirst CLI is installed, you should be able to run mfp commands if the MobileFirst CLI directory is in the PATH environment variable. i.e. PATH=$PATH:/Applications/IBM/MobileFirst-CLI
 
-#### Create a local mfpf server
+#### Create a local MFPF server
 To run some mfp commands a local server must first exist. If you do not already have a local server, follow these steps.
 
 1. At the command line, go to the IBM-Ready-App-for-Telecommunications/TelcoReadyAppMFP directory which is inside of the mobileTelco git repository that you cloned earlier.
@@ -141,7 +141,7 @@ To run some mfp commands a local server must first exist. If you do not already 
 
 	`mfp server add`
 3. Select the local server option to create the local server.
-4. Check you list of servers to make sure the server was created.
+4. Check your list of servers to make sure the server was created.
 
 	`mfp server info`
 5. Start your local mfp server so additional mfp commands, such as mfp push, can be run. This may take a moment to start.
