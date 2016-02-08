@@ -23,10 +23,10 @@ To find this information:
 1. Log into Bluemix at https://console.ng.bluemix.net.
 2. Select **DASHBOARD**.
 3. Select the space you where you would like your Telecommunications app to run.
-4. In the Containers tile, information about your IP addresses is listed.
+4. Information about your IP addresses can be found in the Containers tile. 
 5. Check that the **Public IPs Requested** field has at least one available IP address.
 
-If you have an IP address available, you can request a new IP or use an existing available IP to start building your Telecommunications app. If all of your IP addresses have been used, you will need to release one. In either case, to manage your public IP addresses, install the CF IC plugin, which can be found at the website below.
+If you have an IP address available, you can request a new IP or use an existing IP to start building your Telecommunications app. If all of your IP addresses have been used, you will need to release one. In either case, to manage your public IP addresses, install the CF IC plugin, which can be found at the website below.
 
 https://www.ng.bluemix.net/docs/containers/container_cli_ov.html#container_cli_cfic_installs
 
@@ -55,7 +55,7 @@ The IBM MobileFirst Platform Foundation for IBM Containers zip archive contains 
 For more information about the IBM MobileFirst Foundation Platfom on IBM Containers, see [https://developer.ibm.com/mobilefirstplatform/documentation/getting-started-7-1/bluemix/run-foundation-on-bluemix](https://developer.ibm.com/mobilefirstplatform/documentation/getting-started-7-1/bluemix/run-foundation-on-bluemix).
 
 1. [Review license and download zip file.](http://www14.software.ibm.com/cgi-bin/weblap/lap.pl?popup=Y&li_formnum=L-BVID-9XEQG7&accepted_url=http://public.dhe.ibm.com/ibmdl/export/pub/software/products/en/MobileFirstPlatform/mfpfcontainers/ibm-mfpf-container-7.1.0.0-eval.zip)
-2. Once you have agreed to the license and downloaded the zip, extract the contents of the zip.
+2. Once you have agreed to the license and downloaded the file, extract the contents.
 
 ### Updating Dockerfiles for Java version
 In the ibm-mfpf-container-7.1.0.0-eval/mfpf-server and ibm-mfpf-container-7.1.0.0-eval/mfpf-analytics folders, there are Dockerfiles that are used to create the containers. These Dockerfiles refer to a version of Java that is included in the dependencies folder. Since you build .war, .adapter, and .wlapp files on your local machine, to avoid Java version incompatibilities, you may need to match Java versions for your local machine with the version used to create the container.
@@ -84,17 +84,17 @@ This repository contains the updated solution for the IBM ReadyApp for Telecommu
   `git clone https://github.com/cfsworkload/mobileTelco.git`
 
 
-## Set up Cloudant GEO database
+## Set up a Cloudant GEO database
 A Cloudant Geospatial database is required to query for wifi hotspots around a given user. Cloudant Geospatial allows a user to query the cloudant database using the standard GeoJSON formatted documents. For more information on developing queries and setting up the database visit [CloudantGeo](https://cloudant.com/product/cloudant-features/geospatial/). Cloudant on Bluemix does not currently support geospatial indexing and query. Until then, a Cloudant database must be created on Cloudant.com.
 
-### Create Cloudant Geospatial database
+### Create a Cloudant Geospatial database
 Create a Cloudant account and database to be accessed and populated with hotspot data.
 
 1. Go to Cloudant.com to create an account.
 2. Click **Create Database**, enter a name for the database and click **Create** to create your geospatial capable database.
 
 ### Install IBM MobileFirst Platform Studio 7.1.0 Eclipse Plugin
-IBM MobileFirst Platform Studio is an Eclipse plug-in that helps you quickly build, run, and manage mobile web, hybrid, and native apps.
+IBM MobileFirst Platform Studio is an Eclipse plug-in that helps you quickly build, run, and manage web, hybrid, and native mobile apps.
 
 1. Start Eclipse.
 2. Select **Help** and then click **Eclipse Marketplace** to open the Eclipse Marketplace window.
@@ -108,18 +108,18 @@ IBM MobileFirst Platform Studio is an Eclipse plug-in that helps you quickly bui
 In Eclipse, import the TelcoReadyAppMFP folder into the Eclipse workspace to access CloudantService.java for the next section.
 
 1. First, go back to your Eclipse IDE and change your view to the Package Explorer. This can be accessed by going to **Window** > **Show View** > **Other** > **General** > **Project Explorer**. This will open up the Project Explorer in the left panel of your Eclipse workspace. 
-2. Next, right-click on the Package Explorer and choose **Import**->**Import**. 
+2. Right-click on the Package Explorer and choose **Import**->**Import**. 
 3. In the resulting dialog, find and expand the General folder and select **Existing Projects into Workspace**. 
-4. Now, select **Next** and navigate to location where you have saved the Telco source code. 
-5. Finally, choose the TelcoReadyAppMFP folder in the resulting dialog and click **Finish** to complete the import.
+4. Select **Next** and navigate to location where you have saved the Telco source code. 
+5. Choose the TelcoReadyAppMFP folder in the resulting dialog and click **Finish** to complete the import.
 
-### Populate database with data
+### Populate your database with data
 1. Go to server/java/resources/app.properties and change the values to reflect your account and password and database name. The Cloudant account and username are the same value by default.
 2. Navigate to the CloudantService.java class in Eclipse under server/java/com/ibm/mil/cloudant and right click the class and click **Run as Java Application**. This will run main() method in CloudantService which uploads hotspots.json under server/java/resources/db/ to the Cloudant database specified in app.properties
 
 The database is now set up to query using the CloudantGeoAdapter under the MobileFirst Platform.
 
-## Install MobileFirst Platform CLI
+## Install the MobileFirst Platform CLI
 The IBM MobileFirstFirst Platform Command Line Interface tool is used to easily create, manage, push, and register MobileFirst client and server artifacts. Specifically, you will use the CLI to create the server artifacts in the next section.
 
 1. Download the CLI package for the required release version:
@@ -128,8 +128,8 @@ The IBM MobileFirstFirst Platform Command Line Interface tool is used to easily 
         install_linux.bin
         install_mac.app
         install_windows.exe
-3. Select and run the installer that is appropriate for your platform. A GUI appears and guides you through the installation of Command Line Interface. Follow the instructions to complete your installation.
-4. On completion of the installation, log out from the OS, and then log back in. This action ensures that the appropriate commands are on your system path.
+3. Select and run the installer that is appropriate for your platform. A GUI appears and guides you through the installation of the  CLI. Follow the instructions to complete your installation.
+4. On completion of the installation, log out of the OS, and then log back in. This action ensures that the appropriate commands are on your system path.
 
 When the MobileFirst CLI is installed, you should be able to run mfp commands if the MobileFirst CLI directory is in the PATH environment variable. i.e. PATH=$PATH:/Applications/IBM/MobileFirst-CLI
 
@@ -257,23 +257,23 @@ Before you configure these properties, you will first need to create a Cloud Fou
 9. **Restage** your app.
 
 Using the values entered in the Cloud Foundry App creation for these properties.
-- DB_SRV_NAME - Your Bluemix DB service instance name.
-- APP_NAME - Your Bluemix DB application name. Note: Choose a unique name.
-- RUNTIME_NAME - The MobileFirst project runtime name. Required for configuring runtime databases only, as explained in the prepareserverdbs.sh step. The first use of this file by the prepareserverdbs.sh script requires the property to be commented out to the admin database. After that, it is uncommented out for the runtime database(s). The name of the runtime should match the name of the .war file created by the MobileFirst CLI. e.g. TelcoReadyAppMFP. 
-- SCHEMA_NAME – Your database schema name. Note: For the sqldb_free plan, the SCHEMA is pre-configured and thus ignored. The default names are:
- - For the admin database: WLDAMIN
- - For the MobileFirst project runtime database: the value of RUNTIME_NAME
+- `DB_SRV_NAME` - Your Bluemix DB service instance name.
+- `APP_NAME` - Your Bluemix DB application name. Note: Choose a unique name.
+- `RUNTIME_NAME` - The MobileFirst project runtime name. Required for configuring runtime databases only, as explained in the prepareserverdbs.sh step. The first use of this file by the prepareserverdbs.sh script requires the property to be commented out to the admin database. After that, it is uncommented out for the runtime database(s). The name of the runtime should match the name of the .war file created by the MobileFirst CLI. e.g. TelcoReadyAppMFP. 
+- `SCHEMA_NAME` – Your database schema name. Note: For the sqldb_free plan, the SCHEMA is pre-configured and thus ignored. The default names are:
+ - For the admin database: `WLDAMIN`
+ - For the MobileFirst project runtime database: the value of `RUNTIME_NAME`
  
 **prepareserver.properties** - This defines the properties needed to run the perpareserver.sh script which creates the MobileFirst Platform Foundation server image and pushes it to the IBM Bluemix container registry.
 
-- SERVER_IMAGE_TAG - A tag for the image. Should be of the form: registry-url/namespace/your-tag. Same as in startserver.properties. e.g. registry.ng.bluemix.net/mynamespace/mfpserver71:latest
-- PROJECT_LOC - A path to the root directory of your MobileFirst project. Multiple project locations can be delimited by a comma. For this solution, uncomment out this property and enter the full directory location of IBM-Ready-App-for-Telecommunications/TelcoReadyAppMFP.
+- `SERVER_IMAGE_TAG` - A tag for the image. Should be of the form: registry-url/namespace/your-tag. Same as in startserver.properties. e.g. registry.ng.bluemix.net/mynamespace/mfpserver71:latest
+- `PROJECT_LOC` - A path to the root directory of your MobileFirst project. Multiple project locations can be delimited by a comma. For this solution, uncomment out this property and enter the full directory location of IBM-Ready-App-for-Telecommunications/TelcoReadyAppMFP.
 
 **startserver.properties** - This defines the properties to run the IBM MobileFirst Platform Foundation server image on an IBM Bluemix container service.
 
-- SERVER_IMAGE_TAG - A tag for the image. Should be of the form: registry-url/namespace/your-tag. Same as in prepareserver.properties. e.g. registry.ng.bluemix.net/mynamespace/mfpserver71:latest
-- SERVER_CONTAINER_NAME - A name for your Bluemix Container. Give this property a unique name.
-- SERVER_IP - An IP address that the Bluemix Container should be bound to. Use the IP address that you acquired earlier.
+- `SERVER_IMAGE_TAG` - A tag for the image. Should be of the form: registry-url/namespace/your-tag. Same as in prepareserver.properties. e.g. registry.ng.bluemix.net/mynamespace/mfpserver71:latest
+- `SERVER_CONTAINER_NAME` - A name for your Bluemix Container. Give this property a unique name.
+- `SERVER_IP` - An IP address that the Bluemix Container should be bound to. Use the IP address that you acquired earlier.
 
 ## Run the scripts to build and deploy
 The scripts found in the mfpf-server/scripts directory use the properties set in the previous section to build and deploy the MobileFirst server with the Telecommunications runtime environment. These scripts must run in the bash shell or they may not run as expected.
@@ -308,7 +308,7 @@ To view all available images in your Bluemix repository run:
 The list contains the image name, date of creation and ID.
 
 ### startserver.sh – Running the image on an IBM Container
-The startserver.sh script is used to run the Mobilefirst Server image on an IBM Container. It also binds your image to the public IP you configured in the SERVER_IP property.
+The startserver.sh script is used to run the Mobilefirst Server image on an IBM Container. It also binds your image to the public IP you configured in the `SERVER_IP` property.
 
   `./startserver.sh args/startserver.properties`
 
