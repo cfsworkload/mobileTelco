@@ -128,7 +128,7 @@ The IBM MobileFirstFirst Platform Command Line Interface tool is used to easily 
         install_linux.bin
         install_mac.app
         install_windows.exe
-3. Select and run the installer that is appropriate for your platform. A GUI appears and guides you through the installation of the  CLI. Follow the instructions to complete your installation.
+3. Select and run the installer that is appropriate for your platform. A GUI appears and guides you through the installation of the CLI. Follow the instructions to complete your installation.
 4. On completion of the installation, log out of the OS, and then log back in. This action ensures that the appropriate commands are on your system path.
 
 When the MobileFirst CLI is installed, you should be able to run mfp commands if the MobileFirst CLI directory is in the PATH environment variable. i.e. PATH=$PATH:/Applications/IBM/MobileFirst-CLI
