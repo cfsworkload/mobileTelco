@@ -11,7 +11,7 @@ IBM Ready App for Telecommunications demonstrates a new genre of mobile service 
 #### Other Notes
 - The IBM MobileFirst Platform Foundation on IBM Containers does not currently run a Windows OS but a virtual machine with Linux can be used to run the scripts.
 
-## Sign up and log into Bluemix and DevOps
+## Create accounts and log in
 Sign up for Bluemix at https://console.ng.bluemix.net and DevOps Services at https://hub.jazz.net. When you sign up, you'll create an IBM ID, create an alias, and register with Bluemix.
 
 
