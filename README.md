@@ -26,7 +26,7 @@ To find this information:
 4. Information about your IP addresses can be found in the Containers tile. 
 5. Check that the **Public IPs Requested** field has at least one available IP address.
 
-If you have an IP address available, you can request a new IP or use an existing IP to start building your Telecommunications app. If all of your IP addresses have been used, you will need to release one. In either case, to manage your public IP addresses, install the CF IC plugin, which can be found at the website below.
+If you have an IP address available, you can request a new IP or use an existing IP to start building your Telecommunications app. If all of your IP addresses have been used, you will need to unbind one. In either case, to manage your public IP addresses, install the CF IC plugin, which can be found at the website below.
 
 https://www.ng.bluemix.net/docs/containers/container_cli_ov.html#container_cli_cfic_installs
 
@@ -45,9 +45,9 @@ Once installed:
 5. If you are not at your limit of IP addresses and want a new one, request an IP address.
 
   `cf ic ip request`
-6. If you need to make an IP address available, release an IP address currently in use.
+6. If you need to make an IP address available, unbind an IP address currently in use.
 
-  `cf ic ip release <public IP>`  
+  `cf ic ip unbind <public IP> <Container ID>`  
 
 ## Download IBM MobileFirst Platform Foundation for IBM Containers
 The IBM MobileFirst Platform Foundation for IBM Containers zip archive contains source code and scripts needed to build and deploy an MFPF server on IBM containers. It is first built locally, and then pushed to IBM Containers on Bluemix. Using this project allows any MobileFirst runtime environment to be included in the IBM container. The zip file includes separate installation packages for the MobileFirst Operations Console and the MobileFirst Analytics Console. For the purposes of this solution, you only need the Operations Console to get the mobile app up and running.
